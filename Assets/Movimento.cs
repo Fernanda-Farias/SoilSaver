@@ -9,7 +9,6 @@ public class Movimento : MonoBehaviour
     
     [Header("Configurações de Energia/Tempo")]
     public float energia = 100f; 
-    // Velocidade reduzida de 15 para 8 para um ritmo mais agradável
     public float velocidadeDoTempo = 3f; 
     public TMP_Text textoEnergia; 
     public GameObject telaMorte; 
@@ -67,7 +66,7 @@ public class Movimento : MonoBehaviour
             Ray raio = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit acerto;
 
-            // A MÁGICA AQUI: QueryTriggerInteraction.Collide força a Unity a "enxergar" o Trigger do Nutriente!
+            
             if (Physics.Raycast(raio, out acerto, Mathf.Infinity, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Collide))
             {
                 if (acerto.collider.CompareTag("Nutriente"))
@@ -85,7 +84,6 @@ public class Movimento : MonoBehaviour
         }
     }
 
-    // Retornamos a função de colisão para que a captura física e a pontuação funcionem perfeitamente
     private void OnTriggerEnter(Collider outro)
     {
         if (!jogoIniciado || jogoFinalizado) return;
@@ -98,7 +96,6 @@ public class Movimento : MonoBehaviour
             nutrientesColetados++; 
             AtualizarInterface();
             
-            // Destrói o nutriente ao encostar
             Destroy(outro.gameObject); 
 
             if (nutrientesColetados >= metaNutrientes)
